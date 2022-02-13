@@ -55,11 +55,14 @@ def get_base_date_list(from_year, to_year):
 
 def get_yyyymm_list(from_yyyymm, to_yyyymm):
 
+    '''
     a = np.arange(int(from_yyyymm), int(to_yyyymm) + 1)
-
     a = a[(a % 100 != 0) & (a % 100 <= 12)]
-
     yyyymm_list = a.astype(str)
+    '''
+
+    dates = pd.date_range(from_yyyymm + '01', to_yyyymm + '01', freq='MS')
+    yyyymm_list = ['{}{:02d}'.format(d.year, d.month) for d in dates]
 
     return yyyymm_list
 
