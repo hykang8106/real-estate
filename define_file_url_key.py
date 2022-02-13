@@ -1,14 +1,22 @@
 
+from os.path import exists
+
 from proc_query_result import *
 
 # download code file from "https://www.code.go.kr/index.do"
 # resave ".txt" file as "utf-8" format
+
 code_file = 'C:\\Users\\hykang\\Desktop\\moonji_project_code\\법정동코드 전체자료.txt'
+# when run in joonho computer
+if not exists(code_file):
+   code_file = 'C:\\Users\\Joon Ho\\Desktop\\hykang\\real_estate\\법정동코드 전체자료.txt'
 
 # public data portal:
 # https://www.data.go.kr/data/15058352/openapi.do
 # login info: id = khy716, pw = hykang8106!
 # valid until 2023/12/11
+
+apt_trade_count_url = 'http://openapi.reb.or.kr/OpenAPI_ToolInstallPackage/service/rest/AptTradingStateSvc/getAptTrdStateCaseOfNbr?'
 
 weekly_apt_trend_url = 'http://openapi.reb.or.kr/OpenAPI_ToolInstallPackage/service/rest/WeeklyAptTrendSvc'
 

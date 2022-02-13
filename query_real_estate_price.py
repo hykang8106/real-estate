@@ -18,14 +18,6 @@ from study_real_estate_price import *
 
 if __name__ == "__main__":
 
-    '''
-    gu = '유성구'
-    dong = '문지동'
-    from_year = '2021'
-    # from_year = '2017'
-    to_year = '2021'
-    '''
-
     if len(sys.argv) < 6:
         print("#### [error] need input: 'query_type' 'gu' 'dong' 'from_yyyymm' 'to_yyyyymm' 'apt_name'")
         print(command_example_1)
@@ -33,6 +25,8 @@ if __name__ == "__main__":
         print(command_example_3)
         print(command_example_4)
         print(command_example_5)
+        print(command_example_6)
+        print(command_example_7)
         sys.exit()
 
     query_type = sys.argv[1]
@@ -94,74 +88,23 @@ if __name__ == "__main__":
             print('status code =', res.status_code)
         items_list += get_items(res)
 
-    '''
-    for base_date in base_date_list:
-        res = get_data(url, service_key, gu_code, base_date)
-        print(res.status_code)
-        items_list += get_items(res)
-    '''
-
     # res.close()
 
-    items = pd.DataFrame(items_list)
+    price_df = pd.DataFrame(items_list)
 
-    items = proc_result[query_type](items, dong, apt)
+    price_df = proc_result[query_type](price_df, dong, apt)
+    if price_df.empty:
+        print('\n#### query result filtering output empty, check program input')
+        sys.exit()
 
     if 'apt' in query_type:
         filename = '{}_{}_{}_{}_{}_{}.xls'.format(query_type, gu, dong, apt, from_yyyymm, to_yyyymm)
     else:
         filename = '{}_{}_{}_{}_{}.xls'.format(query_type, gu, dong, from_yyyymm, to_yyyymm)
 
-    # filename = 'temp.xls'
-    items.to_excel(filename, index=False)
+    price_df.to_excel(filename, index=False)
     print("\n### query result saved into file =", filename)
-
-    if (query_type == 'single_rent') & (gu == '유성구'):
-        conv_rate_col = 'single_daejeon'
-    elif (query_type == 'single_rent') & (gu == '세종특별자치시'):
-        conv_rate_col = 'single_sejong'
-    elif (query_type == 'apt_rent') & (gu == '유성구'):
-        conv_rate_col = 'apt_yuseong'
-    elif (query_type == 'apt_rent') & (gu == '세종특별자치시'):
-        conv_rate_col = 'apt_sejong'
-    else:
-        conv_rate_col = ''
 
     sys.exit()
 
-    if query_type == 'single_rent':
-        if not conv_rate_col:
-            price_per_m2 = compute_single_rent_price_per_m2(items, conv_rate_table, conv_rate_col)
-            # plot_rent_price_per_m2()
-
-    elif query_type == 'single_sale':
-        price_per_m2 = items['sale_price_1e4'] / items['build_area_m2']
-
-        # price_per_m2 = compute_single_sale_price_per_m2(items)
-
-    elif query_type == 'apt_rent':
-        if not conv_rate_col:
-            price_per_m2 = compute_apt_rent_price_per_m2(items, conv_rate_table, conv_rate_col)
-   
-    elif query_type == 'apt_sale':
-        price_per_m2 = items['sale_price_1e4'] / items['area_m2']
-        # price_per_m2 = compute_apt_sale_price_per_m2(items)
-          
-        
-    # items['conv_deposit_rent_1e4'] = items['deposit_rent_1e4'] + items['month_rent_1e4']
-
-    '''
-    if sys.argv[1] == 'single_rent':
-        items = process_single_rent(items, dong)
-    elif sys.argv[1] == 'single_sale':
-        items = process_single_sale(items, dong)
-    elif sys.argv[1] == 'apt_rent':
-        items = process_apt_rent(items, dong, apt)
-    elif sys.argv[1] == 'apt_sale':
-        items = process_apt_sale(items, dong, apt)
-    '''
-
-'''
-soup = BeautifulSoup(res.content, 'lxml-xml')
-items = soup.findall('item')
-'''
+    study_real_estate_price(price_df, conv_rate_table, query_type, gu, dong, apt, from_yyyymm, to_yyyymm)
