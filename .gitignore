@@ -1,0 +1,14 @@
+# ignore matlab file
+*.m
+
+# ignore query result excel directory
+query_result_xls/
+
+# ignore hwp file
+*.hwp
+
+# ignore docx file
+*.docx
+
+# ignore image file
+*.jpg
