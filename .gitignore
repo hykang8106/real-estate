@@ -12,3 +12,7 @@ query_result_xls/
 
 # ignore image file
 *.jpg
+
+# ignore python cache directory
+__pycache__/
+
