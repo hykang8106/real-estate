@@ -1,6 +1,6 @@
 # public data portal:
 # https://www.data.go.kr/data/15058352/openapi.do
-# login info: id = khy716, pw = hykang8106!
+# login info: id = khy716, pw = hykang8106#
 
 import pandas as pd
 import requests
@@ -79,17 +79,23 @@ def process_land_price_df(price_df, gu, dong, district, category):
 
     return price_df
 
+help_message = \
+    """ 
+    #### [error] need input: 'gu' 'dong' 'from_yyyymm' 'to_yyyyymm' 'district' 'category'
+
+    [example] query_land_price 유성구 문지동 201701 202112 제1종일반주거지역 대
+    [example] query_land_price 세종특별자치시 조치원읍 201901 202112 all all
+    [example] query_land_price 세종특별자치시 연기면 201901 202112 all all
+    [example] query_land_price 세종특별자치시 all 201901 202112 all all
+    [example] query_land_price 서귀포시 all 202001 202112 all all
+    [example] query_land_price 제주시 all 202001 202112 all all
+    [example] query_land_price 고흥군 all 202001 202112 all all
+    """
+
 if __name__ == "__main__":
 
     if len(sys.argv) != 7:
-        print("#### [error] need input: 'gu' 'dong' 'from_yyyymm' 'to_yyyyymm' 'district' 'category'")
-        print('[example 1] query_land_price 유성구 문지동 201701 202112 제1종일반주거지역 대')
-        print('[example 2] query_land_price 세종특별자치시 조치원읍 201901 202112 all all')
-        print('[example 3] query_land_price 세종특별자치시 연기면 201901 202112 all all')
-        print('[example 4] query_land_price 세종특별자치시 all 201901 202112 all all')
-        print('[example 5] query_land_price 서귀포시 all 202001 202112 all all')
-        print('[example 6] query_land_price 제주시 all 202001 202112 all all')
-        print('[example 7] query_land_price 고흥군 all 202001 202112 all all')
+        print(help_message)
         sys.exit()
     
     query_type = 'land_sale'

@@ -6,14 +6,11 @@ from proc_query_result import *
 # download code file from "https://www.code.go.kr/index.do"
 # resave ".txt" file as "utf-8" format
 
-code_file = 'C:\\Users\\hykang\\Desktop\\moonji_project_code\\법정동코드 전체자료.txt'
-# when run in joonho computer
-if not exists(code_file):
-   code_file = 'C:\\Users\\Joon Ho\\Desktop\\hykang\\real_estate\\법정동코드 전체자료.txt'
+code_file = 'C:\\Users\\hykang\\Documents\\workspace\\real-estate\\법정동코드 전체자료.txt'
 
 # public data portal:
 # https://www.data.go.kr/data/15058352/openapi.do
-# login info: id = khy716, pw = hykang8106!
+# login info: id = khy716, pw = hykang8106#
 # valid until 2023/12/11
 
 apt_trade_count_url = 'http://openapi.reb.or.kr/OpenAPI_ToolInstallPackage/service/rest/AptTradingStateSvc/getAptTrdStateCaseOfNbr?'
@@ -34,6 +31,8 @@ apt_sale_url = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/servi
 
 apt_rent_url = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptRent?'
 
+land_sale_url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcLandTrade?'
+
 service_key = 'yrvdMVzLvNSv1dGkAUgSoLMOXKSkLq4F11RLR2cHwxSi4MWiMxLyh3CB4XV4g5NB3vw4fVVMhwftbXzyZUwnog%3D%3D'
 
 query_url = {'single_rent' : single_rent_url, 'single_sale' : single_sale_url, \
@@ -43,13 +42,6 @@ query_type_list = ['single_rent', 'single_sale', 'apt_rent', 'apt_sale']
 
 proc_result = {'single_rent' : process_single_rent, 'single_sale' : process_single_sale, \
    'apt_rent' : process_apt_rent, 'apt_sale' : process_apt_sale}
-
-command_example_1 = "[example] query_real_estate_price single_rent 유성구 문지동 201701 202112"
-command_example_2 = "[example] query_real_estate_price single_sale 유성구 문지동 201701 202112"
-command_example_3 = "[example] query_real_estate_price apt_rent 유성구 전민동 201701 202112 문지효성해링턴플레이스"
-command_example_4 = "[example] query_real_estate_price apt_sale 세종특별자치시 반곡동 201701 202112 수루배마을1단지"
-command_example_5 = "[example] query_real_estate_price apt_sale 성동구 행당동 201701 202112 대림e-편한세상"
-command_example_6 = "[example] query_real_estate_price apt_sale 유성구 전민동 201701 202112 문지효성해링턴플레이스"
 
 # blow is not needed: use "query_rent_conv_rate.py",
 # which query rent conversion rate to kosis web site and save it into excel file

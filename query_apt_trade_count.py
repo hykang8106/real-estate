@@ -1,7 +1,7 @@
 
 # public data portal:
 # https://www.data.go.kr
-# login info: id = khy716, pw = hykang8106!
+# login info: id = khy716, pw = hykang8106#
 #
 # 데이터명 = '한국부동산원_아파트거래현황 조회 서비스'
 

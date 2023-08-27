@@ -1,5 +1,5 @@
 # [ref] https://kosis.kr/openapi/mypage/myPage_01List.jsp
-# id = khy716, pw = uresj38106!
+# id = khy716, pw = uresj38106#
 #
 # 기관명 = '한국부동산원'
 # 기관코드 = '408'

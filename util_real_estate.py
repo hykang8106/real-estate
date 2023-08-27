@@ -32,6 +32,25 @@ def get_gu_code(code, gu):
 
     return gu_code
 
+def get_gu_code(code, metro, gu):
+    # 전반적인 수정 필요함. regex 사용 시도해 볼것.
+
+    # 나쁜 코드: 수정할 것!
+    if metro == '세종':
+        gu = '세종특별자치시'
+
+    gu_code = code[(code['name'].str.contains(metro)) & (code['name'].str.contains(gu))]
+    if gu_code.empty:
+        gu_code = ''
+        return gu_code
+    print(gu_code.reset_index(drop=True).head(1))
+    # print(gu_code.reset_index(drop=True).iloc[0])
+    gu_code = gu_code['code'].reset_index(drop=True)
+    gu_code = str(gu_code[0])[0:5]
+    print('gu code =', gu_code)
+
+    return gu_code
+
 def get_dong_code(code, dong):
 
     dong_code = code[(code['name'].str.contains(dong))]
@@ -91,3 +110,24 @@ def get_items(response):
             data[tag] = text
         item_list.append(data)  
     return item_list
+
+if __name__ == "__main__":
+
+    if len(sys.argv) < 3:
+        print('input error')
+        sys.exit()
+
+    metro = sys.argv[1]
+    gu = sys.argv[2]
+
+    """ met = '서울'
+    gu = '성동구' """
+
+    code = load_code()
+
+    """ met_code = code[(code['name'].str.contains(met))]
+
+    gu_code = met_code[(met_code['name'].str.contains(gu))] """
+
+    get_gu_code(code, metro, gu)
+
