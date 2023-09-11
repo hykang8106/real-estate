@@ -67,7 +67,7 @@ help_message = \
     [example] query_land_price 대전 유성구 201701 202112 문지동 제1종일반주거지역 대
     [example] query_land_price 세종 세종 201901 202112 조치원읍
     [example] query_land_price 세종 세종 201901 202112 연기면
-    [example] query_land_price 강원도 춘천시 201901 202112
+    [example] query_land_price 강원 춘천시 201901 202112
     [example] query_land_price 세종 세종 201901 202112
     [example] query_land_price 제주 서귀포시 202001 202112
     [example] query_land_price 제주 제주시 202001 202112

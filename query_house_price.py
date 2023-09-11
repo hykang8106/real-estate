@@ -60,6 +60,7 @@ help_message = \
     [example] query_house_price apt_sale 세종 세종 202201 202307
     [example] query_house_price apt_sale 서울 성동구 201701 202112 행당동 대림e-편한세상
     [example] query_house_price apt_sale 대전 유성구 201701 202112 전민동 엑스포
+    [example] query_house_price apt_sale 강원 춘천시 202001 202308 죽림동
     """
 
 filename_base = {
