@@ -137,11 +137,14 @@ if __name__ == "__main__":
         items_list += get_items(res)
 
     price_df = pd.DataFrame(items_list)
+    if price_df.empty:
+        print('\n#### query result empty, server may be in problem')
+        sys.exit()
 
     price_df = process_land_sale(price_df, dong, use_area, land_purpose)
 
     if price_df.empty:
-        print('\n#### query result filtering output empty, check program input')
+        print('\n#### query result filtering output empty, check input(metro, gu, dong)')
         sys.exit()
 
     if not os.path.isdir(query_result_folder):

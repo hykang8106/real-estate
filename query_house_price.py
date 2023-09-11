@@ -127,10 +127,13 @@ if __name__ == "__main__":
     # res.close()
 
     price_df = pd.DataFrame(items_list)
+    if price_df.empty:
+        print('\n#### query result empty, server may be in problem')
+        sys.exit()
 
     price_df = proc_result[query_type](price_df, dong, apt)
     if price_df.empty:
-        print('\n#### query result filtering output empty, check program input')
+        print('\n#### query result filtering output empty, check input(metro, gu, dong)')
         sys.exit()
 
     if not os.path.isdir(query_result_folder):
