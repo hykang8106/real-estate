@@ -204,8 +204,13 @@ def process_land_sale(price_df, dong, use_area, land_purpose):
     price_df['월'] = price_df['월'].astype(int)
     price_df['일'] = price_df['일'].astype(int)
 
-    price_df = price_df.loc[:, ['용도지역', '지목', '거래면적', '거래금액', '시군구', '법정동', \
-        '년', '월', '일']]
+    # '시군구' 컬럼이 없는 경우 있음: '세종' 
+    if '시군구' in price_df.columns:
+        price_df = price_df.loc[:, ['용도지역', '지목', '거래면적', '거래금액', '시군구', '법정동', \
+            '년', '월', '일']]
+    else:
+        price_df = price_df.loc[:, ['용도지역', '지목', '거래면적', '거래금액', '법정동', \
+            '년', '월', '일']]
 
     price_df = price_df.sort_values(by=['년', '월', '일']).reset_index(drop=True)
 
